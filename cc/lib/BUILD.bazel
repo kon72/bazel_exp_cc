@@ -1,0 +1,33 @@
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "foo_internal",
+    srcs = ["foo_internal.cc"],
+    hdrs = ["foo_internal.h"],
+)
+
+cc_library(
+    name = "foo",
+    srcs = ["foo.cc"],
+    hdrs = ["foo.h"],
+    local_defines = ["FOO_IMPLEMENTATION"],
+    deps = [":foo_internal"],
+)
+
+cc_library(
+    name = "bar_internal",
+    srcs = ["bar_internal.cc"],
+    hdrs = ["bar_internal.h"],
+    deps = [":foo"],
+)
+
+cc_library(
+    name = "bar",
+    srcs = ["bar.cc"],
+    hdrs = ["bar.h"],
+    local_defines = ["BAR_IMPLEMENTATION"],
+    deps = [
+        ":bar_internal",
+        ":foo",
+    ],
+)

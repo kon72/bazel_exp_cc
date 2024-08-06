@@ -1,0 +1,63 @@
+cc_shared_library(
+    name = "foo",
+    deps = ["//cc/lib:foo"],
+)
+
+cc_shared_library(
+    name = "bar",
+    dynamic_deps = [":foo"],
+    deps = ["//cc/lib:bar"],
+)
+
+# For main_dynamic_deps
+cc_binary(
+    name = "main_dynamic_deps",
+    srcs = ["main.cc"],
+    dynamic_deps = [":bar"],
+    deps = ["//cc/lib:bar"],
+)
+
+# For main_srcs
+cc_binary(
+    name = "main_srcs",
+    srcs = [
+        "main.cc",
+        ":bar",
+    ],
+    deps = ["//cc/lib:bar"],
+)
+
+# For main_library_wrapper
+cc_library(
+    name = "bar_wrapper",
+    srcs = [":bar"],
+    deps = ["//cc/lib:bar"],
+)
+
+cc_binary(
+    name = "main_library_wrapper",
+    srcs = ["main.cc"],
+    features = ["-layering_check"],
+    deps = [":bar_wrapper"],
+)
+
+# For main_import
+cc_import(
+    name = "foo_import",
+    shared_library = ":foo",
+)
+
+cc_import(
+    name = "bar_import",
+    shared_library = ":bar",
+    # deps = [":foo_import"],
+)
+
+cc_binary(
+    name = "main_import",
+    srcs = ["main.cc"],
+    deps = [
+        ":bar_import",
+        "//cc/lib:bar",
+    ],
+)

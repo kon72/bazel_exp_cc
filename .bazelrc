@@ -1,0 +1,8 @@
+build --features=header_modules
+build --features=layering_check
+build --features=parse_headers
+
+build --repo_env=APPLE_SUPPORT_LAYERING_CHECK_BETA=1
+
+# https://github.com/bazelbuild/bazel/pull/23089
+# common --incompatible_macos_set_install_name
