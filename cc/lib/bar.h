@@ -2,7 +2,7 @@
 #define CC_LIB_BAR_H_
 
 #if !defined(BAR_DISABLE_SHLIB_EXPORT)
-#if defined(WIN32)
+#if defined(_WIN32)
 
 #if defined(BAR_IMPLEMENTATION)
 #define BAR_EXPORT __declspec(dllexport)
@@ -10,7 +10,7 @@
 #define BAR_EXPORT __declspec(dllimport)
 #endif  // defined(BAR_IMPLEMENTATION)
 
-#else  // defined(WIN32)
+#else  // defined(_WIN32)
 #if defined(BAR_IMPLEMENTATION)
 #define BAR_EXPORT __attribute__((visibility("default")))
 #else
