@@ -6,5 +6,8 @@ build --features=parse_headers
 
 build --repo_env=APPLE_SUPPORT_LAYERING_CHECK_BETA=1
 
+build:clang-cl --extra_toolchains=@local_config_cc//:cc-toolchain-x64_windows-clang-cl
+build:clang-cl --extra_execution_platforms=//cc:x64_windows-clang-cl
+
 # https://github.com/bazelbuild/bazel/pull/23089
 # common --incompatible_macos_set_install_name
