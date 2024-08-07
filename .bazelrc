@@ -1,3 +1,5 @@
+build --incompatible_strict_action_env
+
 build --features=header_modules
 build --features=layering_check
 build --features=parse_headers
