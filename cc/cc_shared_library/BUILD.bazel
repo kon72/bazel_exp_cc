@@ -50,7 +50,7 @@ cc_import(
 cc_import(
     name = "bar_import",
     shared_library = ":bar",
-    # deps = [":foo_import"],
+    deps = [":foo_import"],
 )
 
 cc_binary(
