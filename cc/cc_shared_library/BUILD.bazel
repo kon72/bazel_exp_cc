@@ -38,6 +38,7 @@ cc_import(
 
 cc_import(
     name = "bar_import",
+    hdrs = ["//cc/lib:bar.h"],
     interface_library = select({
         "@platforms//os:windows": ":bar_import_lib",
         "//conditions:default": None,
@@ -49,8 +50,5 @@ cc_import(
 cc_binary(
     name = "main_import",
     srcs = ["main.cc"],
-    deps = [
-        ":bar_import",
-        "//cc/lib:bar",
-    ],
+    deps = [":bar_import"],
 )
