@@ -17,30 +17,6 @@ cc_binary(
     deps = ["//cc/lib:bar"],
 )
 
-# For main_srcs
-cc_binary(
-    name = "main_srcs",
-    srcs = [
-        "main.cc",
-        ":bar",
-    ],
-    deps = ["//cc/lib:bar"],
-)
-
-# For main_library_wrapper
-cc_library(
-    name = "bar_wrapper",
-    srcs = [":bar"],
-    deps = ["//cc/lib:bar"],
-)
-
-cc_binary(
-    name = "main_library_wrapper",
-    srcs = ["main.cc"],
-    features = ["-layering_check"],
-    deps = [":bar_wrapper"],
-)
-
 # For main_import
 cc_import(
     name = "foo_import",
